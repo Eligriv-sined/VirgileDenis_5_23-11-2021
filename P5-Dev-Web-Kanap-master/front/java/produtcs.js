@@ -68,5 +68,17 @@ function getArticle(Product)  //insertion celon ID produit des element respectif
 }
 
 
+function AjouterPanier(Product) {
+  const btnEnvoyer = document.querySelector("#addToCart");
+
+  btnEnvoyer.addEventListener("click" , (e)=>{
+    if (NombreProd.value >= 1  && NombreProd <=100){
+      let choixCouleur = CouleurProd.value;
+      let choixQuantite = NombreProd.value;
+    
+        
+      
+    
+        
 
 
