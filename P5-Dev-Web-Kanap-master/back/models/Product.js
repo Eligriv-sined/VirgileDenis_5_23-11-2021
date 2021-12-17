@@ -72,8 +72,17 @@
     "altTxt": "Photo d'un canapé rose, trois places"
   }
 ];
+exports.find = () => {
+  return new Promise((resolve, reject) => resolve(JSON.parse(JSON.stringify(products))));
+}
 
-export {products};
+exports.findById = (id) => {
+  return new Promise((resolve, reject) =>
+    resolve(JSON.parse(JSON.stringify(products)).find(product =>
+      product._id == id)
+    )
+  );
+}
 
 
 
