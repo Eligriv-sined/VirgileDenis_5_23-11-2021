@@ -125,3 +125,21 @@ supprimerProduit();
 
 //------------------------ A faire cette aprem : --> Modification des quantité de produit 
 //------------------------- ---> Verification des input du form dans le panier + envoie a la page confirmation. si le temps se soir debut page confirmation. 
+
+function prixTotal (){
+    //recupération des Qté
+
+    var saisieQuantité = document.getElementsByClassName('itemQuantity');
+    var longueurSaisie = saisieQuantité.length,
+    totalQuantité = 0 ; 
+
+    for (var i = 0; i < longueurSaisie; ++i ){
+        totalQuantité += saisieQuantité[i].valueAsNumer
+    }
+
+    let totalProduitQuantité = document.getElementById('totalQuantity');
+    totalProduitQuantité.innerHTML = saisieQuantité;
+    console.log(saisieQuantité);
+}
+
+prixTotal()

@@ -81,7 +81,7 @@ function AjouterPanier(Product) {
                           if (prodLocalStorage) {
                           const resultat  = prodLocalStorage.find(
                               (e) => e.id === id && e.couleurProduit === choixCouleur);
-                              if (resultat ) {
+                              if (resultat ) { // si deja 1
                                   let newQuantite =
                                   parseInt(produitDetails.quantiteProduit) + parseInt(resultat.quantiteProduit);
                                   resultat .quantiteProduit = newQuantite;
@@ -95,7 +95,7 @@ function AjouterPanier(Product) {
                                     VerifPopup ();
                                        }
                                     } else {
-                                      prodLocalStorage =[];
+                                      prodLocalStorage =[]; // si ya pas
                                         prodLocalStorage.push(produitDetails);
                                         localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
                                         console.table(prodLocalStorage);
