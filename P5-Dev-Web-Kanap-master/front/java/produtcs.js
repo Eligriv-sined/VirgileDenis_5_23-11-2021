@@ -7,26 +7,8 @@ let Product ="";
 const CouleurProd = document.querySelector("#colors");
 const NombreProd = document.querySelector("#quantity");
 
+getProd()
 
-getProd();
-
-// Récupération des Prod de l'API-----------------------------------------------------------------------------------------------------------------------------------------------------
-function getProd() {
-    fetch("http://localhost:3000/api/products/" + id)
-    .then((res) => {
-        return res.json();
-    })
-
-
-    .then(async function (resultatAPI) {
-      Product = await resultatAPI;
-        console.table(Product);
-        if (Product){
-            getPost(Product);
-        }
-    })
- 
-}
     //----------------------------------------------------------------------------------insertion celon ID produit des element respectif-------------------------------------------------------------------------------------------------
 
 
@@ -122,3 +104,20 @@ function AjouterPanier(Product) {
                                     
                           });
                       }
+
+
+// Récupération des Prod de l'API + Repartion dans le DOM -------------------------------------------------------------------------------------------------------------------------------------------
+function getProd() {
+  fetch("http://localhost:3000/api/products/" + id)
+  .then((res) => {
+      return res.json();
+  })
+  .then(async function (resultatAPI) {
+    Product = await resultatAPI;
+      console.table(Product);
+      if (Product){
+          getPost(Product);
+      }
+  })
+
+}
