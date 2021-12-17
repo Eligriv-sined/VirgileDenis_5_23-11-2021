@@ -11,9 +11,9 @@ const positionEmptyCart = document.querySelector("#cart__items");
 //------------------------------------------------------------------------------------------------------------  Si le panier est vide
 function getCart(){
 if (prodLocalStorage === null || prodLocalStorage == 0) {
-    const emptyCart = `<p>Votre panier est vide</p>`;
+    const emptyCart = `<p>Aucun Articles dans le panier</p>`;
     positionEmptyCart.innerHTML = emptyCart;
-} else {
+} else { // sinon rajout des element au panier
 for (let produit in prodLocalStorage){
     //------------------------------------------------------  Insertion de l'élément "article"
     let productArticle = document.createElement("article");
@@ -86,7 +86,7 @@ for (let produit in prodLocalStorage){
                                                     productItemContentSettings.appendChild(productItemContentSettingsDelete);
                                                     productItemContentSettingsDelete.className = "cart__item__content__settings__delete";
 
-                                                    //------------------------------------------------------  Insertion du btn via element p supprimer
+                                                    //------------------------------------------------------  Insertion du btnsupprimer  via element p 
                                                     let productSupprimer = document.createElement("p");
                                                     productItemContentSettingsDelete.appendChild(productSupprimer);
                                                     productSupprimer.className = "deleteItem";
@@ -100,7 +100,7 @@ getCart();
 
 
 
-//-----------------------------------Btn supression d'un produit---------------------------------
+//-----------------------------------Btn supression d'un produit---------------------------------//
 
 function supprimerProduit() {
     let btn_supprimer = document.querySelectorAll(".deleteItem");
@@ -108,19 +108,20 @@ function supprimerProduit() {
     for (let a = 0; a < btn_supprimer.length; a++){
         btn_supprimer[a].addEventListener("click" , (event) => {
             event.preventDefault();
-
-            //Selection de l'element à supprimer en fonction de son id ET sa couleur
-            let idDelete = prodLocalStorage[a].idProduit;
-            let colorDelete = prodLocalStorage[a].couleurProduit;
-
-            prodLocalStorage = prodLocalStorage.filter( e => e.idProduit !== idDelete || e.couleurProduit !== colorDelete );
-            
+           //-------Selection des élement à supprimer--------------//
+            let idsupr = prodLocalStorage[a].idProduit;
+            let colorsupr = prodLocalStorage[a].couleurProduit;
+           //-----------------------------------------------------//
+            prodLocalStorage = prodLocalStorage.filter( e => e.idProduit !== idsupr || e.couleurProduit !== colorsupr );
             localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
-
-            //Alerte produit supprimé et refresh
             alert("Ce produit a bien été supprimé du panier");
             location.reload();
         })
     }
 }
 supprimerProduit();
+
+
+
+//------------------------ A faire cette aprem : --> Modification des quantité de produit 
+//------------------------- ---> Verification des input du form dans le panier + envoie a la page confirmation. si le temps se soir debut page confirmation. 
