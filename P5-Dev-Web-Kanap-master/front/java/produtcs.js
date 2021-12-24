@@ -9,9 +9,7 @@ const NombreProd = document.querySelector("#quantity");
 
 getProd()
 
-    //----------------------------------------------------------------------------------insertion celon ID produit des element respectif-------------------------------------------------------------------------------------------------
-
-
+    //----------------------------------------------------insertion celon ID produit des element respectif----------------------------------------------------------------//
     function getPost(Product){
     
     
@@ -41,7 +39,7 @@ getProd()
   AjouterPanier(Product);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------Gestion du panier
+//---------------------------------------------------Gestion du panier--------------------//
 function AjouterPanier(Product) {
     const btn_envoyerPanier = document.querySelector("#addToCart");
 
@@ -77,47 +75,50 @@ function AjouterPanier(Product) {
                       }
                   }
 
-    
+    //---------------------------------A REVOIR------------------------------------------------------------//
                           if (prodLocalStorage) {
                           const resultat  = prodLocalStorage.find(
                               (e) => e.id === id && e.couleurProduit === choixCouleur);
-                              if (resultat ) { // si deja 1
-                                  let newQuantite =
-                                  parseInt(produitDetails.quantiteProduit) + parseInt(resultat.quantiteProduit);
-                                  resultat .quantiteProduit = newQuantite;
+                              if (resultat) {  
+                                   prodLocalStorage =[];     //Si le panier est vide
+                                  prodLocalStorage.push(produitDetails);
                                   localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
                                   console.table(prodLocalStorage);
                                   VerifPopup ();
-                                } else {
+                                } else {  //Si le produit commandé n'est pas dans le panier
                                   prodLocalStorage.push(produitDetails);
                                     localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
                                     console.table(prodLocalStorage);
                                     VerifPopup ();
                                        }
-                                    } else {
-                                      prodLocalStorage =[]; // si ya pas
-                                        prodLocalStorage.push(produitDetails);
-                                        localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
-                                        console.table(prodLocalStorage);
-                                        VerifPopup ();
-                                    }} 
-                                    
+                                    }else  {
+                                      let newQuantite = produitDetails.quantiteProduit + resultat.quantiteProduit
+                                      resultat.quantiteProduit = newQuantite;
+                                      localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+                                      console.table(prodLocalStorage);
+                                      VerifPopup ();
+                                    } } 
+                           //--------------------------------------------------------------------------------------------//
                           });
                       }
 
 
-// Récupération des Prod de l'API + Repartion dans le DOM -------------------------------------------------------------------------------------------------------------------------------------------
+// Récupération des Prod de l'API + Repartion dans le DOM ------------------------------///
 function getProd() {
   fetch("http://localhost:3000/api/products/" + id)
   .then((res) => {
       return res.json();
   })
-  .then(async function (resultatAPI) {
-    Product = await resultatAPI;
-      console.table(Product);
-      if (Product){
-          getPost(Product);
-      }
-  })
-
+  .then((product) => {
+if (product !== undefined){
+  getPost(product)
 }
+  })
+   // Product =  resultatAPI;
+    //  console.table(Product);
+     // if (Product){
+       //   getPost(Product);
+
+      }
+ 
+
