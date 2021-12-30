@@ -7,7 +7,6 @@ const positionEmptyCart = document.querySelector("#cart__items");
 
 
 
-
 //------------------------------------------------------------------------------------------------------------  Si le panier est vide
 function getpanier(){
 if (prodLocalStorage === null || prodLocalStorage == 0) {
@@ -15,27 +14,31 @@ if (prodLocalStorage === null || prodLocalStorage == 0) {
     positionEmptyCart.innerHTML = emptyCart;
 } // ---------------------------------------------------------sinon rajout des element au panier
     else { 
+        
 for (let produit in prodLocalStorage){
+
+    if(prodLocalStorage.idProduit && prodLocalStorage.couleurProduit){}
+
+
     //------------------------------------------------------  Insertion de l'élément "article"
-    let productArticle = document.createElement("article");
+    else { let productArticle = document.createElement("article");
     document.querySelector("#cart__items").appendChild(productArticle);
     productArticle.className = "cart__item";
     productArticle.setAttribute('data-id', prodLocalStorage[produit].idProduit);
         // ------------------------------------------------------ Insertion de l'élément "div"
-        let productDivImg = document.createElement("div");
-        productArticle.appendChild(productDivImg);
-        productDivImg.className = "cart__item__img";
+     let productDivImg = document.createElement("div");
+       productArticle.appendChild(productDivImg);
+     productDivImg.className = "cart__item__img";
  
             //------------------------------------------------------  Insertion de l'image
-            let productImg = document.createElement("img");
-            productDivImg.appendChild(productImg);
-            productImg.src = prodLocalStorage[produit].imgProduit;
-            productImg.alt = prodLocalStorage[produit].altImgProduit;
+          let productImg = document.createElement("img");
+          productDivImg.appendChild(productImg);
+         productImg.src = prodLocalStorage[produit].imgProduit;
+         productImg.alt = prodLocalStorage[produit].altImgProduit;
                 //------------------------------------------------------  Insertion de l'élément "div"
-                let productItemContent = document.createElement("div");
-                productArticle.appendChild(productItemContent);
-                productItemContent.className = "cart__item__content";
-
+              let productItemContent = document.createElement("div");
+               productArticle.appendChild(productItemContent);
+               productItemContent.className = "cart__item__content";
                     //------------------------------------------------------  Insertion de l'élément "div"
                     let productItemContentTitlePrice = document.createElement("div");
                     productItemContent.appendChild(productItemContentTitlePrice);
@@ -91,7 +94,7 @@ for (let produit in prodLocalStorage){
                                                     let productSupprimer = document.createElement("p");
                                                     productItemContentSettingsDelete.appendChild(productSupprimer);
                                                     productSupprimer.className = "deleteItem";
-                                                    productSupprimer.innerHTML = "Supprimer";
+                                                    productSupprimer.innerHTML = "Supprimer";}
 
 
 }}

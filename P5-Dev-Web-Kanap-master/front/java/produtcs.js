@@ -2,7 +2,7 @@ var str = window.location.href;
 var url = new URL(str);
 var id = url.searchParams.get("id");
 console.log(id);
-
+let product2 =[];
 let Product =""; 
 const CouleurProd = document.querySelector("#colors");
 const NombreProd = document.querySelector("#quantity");
@@ -65,7 +65,7 @@ function AjouterPanier(Product) {
 
  //--------------------Creation Zone de Stockage local pour le Panier----------------------------------------------------------------------------------------
               let prodLocalStorage = JSON.parse(localStorage.getItem("produit"));
-
+             
               //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
                   //fenêtre pop-up
@@ -74,29 +74,33 @@ function AjouterPanier(Product) {
                           window.location.href ="cart.html";
                       }
                   }
-
-    //---------------------------------A REVOIR------------------------------------------------------------//
-                          if (prodLocalStorage) {
-                          const resultat  = prodLocalStorage.find(
-                              (e) => e.id === id && e.couleurProduit === choixCouleur);
-                              if (resultat) {  
-                                   prodLocalStorage =[];     //Si le panier est vide
+//----------------------------------------------------------------------------------------------------//
+       
+    //---------------------------------------------------------------------------------------------//
+                          
+    
+    if (prodLocalStorage) {
+                          
+                              if (produitDetails.idProduit && produitDetails.couleurProduit === prodLocalStorage.idProduit && prodLocalStorage.couleurProduit){
+                                let newQuantite = produitDetails.quantiteProduit += prodLocalStorage.quantiteProduit
+                                prodLocalStorage.quantiteProduit = newQuantite;
+                                localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+                                prodLocalStorage.push(produitDetails.quantiteProduit)
+                                console.table(prodLocalStorage);
+                                VerifPopup (); 
+                                } else  if (prodLocalStorage !== null ) {  
+                                    prodLocalStorage.push(produitDetails);
+                                     localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+                                     console.table(prodLocalStorage);
+                                     VerifPopup ();
+                                       }
+                           }
+                                    else  {
+                                      prodLocalStorage =[];     
                                   prodLocalStorage.push(produitDetails);
                                   localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
                                   console.table(prodLocalStorage);
                                   VerifPopup ();
-                                } else {  //Si le produit commandé n'est pas dans le panier
-                                  prodLocalStorage.push(produitDetails);
-                                    localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
-                                    console.table(prodLocalStorage);
-                                    VerifPopup ();
-                                       }
-                                    }else  {
-                                      let newQuantite = produitDetails.quantiteProduit + resultat.quantiteProduit
-                                      resultat.quantiteProduit = newQuantite;
-                                      localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
-                                      console.table(prodLocalStorage);
-                                      VerifPopup ();
                                     } } 
                            //--------------------------------------------------------------------------------------------//
                           });
@@ -120,5 +124,3 @@ if (product !== undefined){
        //   getPost(Product);
 
       }
- 
-
