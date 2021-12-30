@@ -72,6 +72,18 @@ for (let produit in prodLocalStorage){
                     productQte.innerHTML = "quantité : ";
 
                       //------------------------------------------------------ Insertion quantité
+                      //-- if quantity else--///
+
+                    if (prodLocalStorage[produit].quantity !== null){
+                        let productQuantity = document.createElement("input");
+                        productItemContentSettingsQuantity.appendChild(productQuantity);
+                       productQuantity.value = prodLocalStorage[produit].quantity ;
+                        productQuantity.className = "itemQuantity";
+                      productQuantity.setAttribute("type", "number");
+                      productQuantity.setAttribute("min", "1");
+                    productQuantity.setAttribute("max", "100");
+                   productQuantity.setAttribute("name", "itemQuantity");
+                    }else{
                     let productQuantity = document.createElement("input");
                    productItemContentSettingsQuantity.appendChild(productQuantity);
                   productQuantity.value = prodLocalStorage[produit].quantiteProduit ;
@@ -79,7 +91,7 @@ for (let produit in prodLocalStorage){
                  productQuantity.setAttribute("type", "number");
                  productQuantity.setAttribute("min", "1");
                productQuantity.setAttribute("max", "100");
-              productQuantity.setAttribute("name", "itemQuantity");
+              productQuantity.setAttribute("name", "itemQuantity");}
 
               //------------------------------------------------------  Insertion div
            let productItemContentSettingsDelete = document.createElement("div");
