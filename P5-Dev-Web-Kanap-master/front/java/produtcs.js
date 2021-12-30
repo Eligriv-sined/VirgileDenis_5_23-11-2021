@@ -4,6 +4,7 @@ var id = url.searchParams.get("id");
 console.log(id);
 
 let Product =""; 
+
 const CouleurProd = document.querySelector("#colors");
 const NombreProd = document.querySelector("#quantity");
 
@@ -35,8 +36,10 @@ getProd()
       document.querySelector("#colors").appendChild(produitCouleur);
       produitCouleur.value = couleur;
       produitCouleur.innerHTML = couleur;
-  }
+  }  
+  console.table(Product);
   AjouterPanier(Product);
+  
 }
 
 //---------------------------------------------------Gestion du panier--------------------//
@@ -73,36 +76,35 @@ function AjouterPanier(Product) {
                       }
                   }
 
-                          
-if (prodLocalStorage == null ){
-    prodLocalStorage =[];     
+                  console.table(produitDetails);             
+
+
+                  if (prodLocalStorage){
+                    const result = prodLocalStorage.find(el => el.id == produitDetails.id && el.color == prodLocalStorage.color);
+                    if (result){ 
+                      let newQuantite = Number(produitDetails.quantiteProduit) + Number(result.quantiteProduit);
+                      result.quantity = newQuantite; 
+                      localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+                      console.table(prodLocalStorage);
+                      VerifPopup ();
+                    }else {
+                           prodLocalStorage.push(produitDetails);
+                            localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+                            console.table(prodLocalStorage);
+                            VerifPopup ();
+                    }
+                  }else{
+                    prodLocalStorage =[];     
     prodLocalStorage.push(produitDetails);
     localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
     console.table(prodLocalStorage);
     VerifPopup ();
-} else if (prodLocalStorage !== null){
-  prodLocalStorage.push(produitDetails);
-                            localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
-                            console.table(prodLocalStorage);
-                            VerifPopup (); 
-} else {
-  let quantitéprod = prodLocalStorage[produit].quantiteProduit + produitDetails.quantiteProduit
-                            prodLocalStorage.quantiteProduit = quantitéprod ; 
-                            localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
-                                prodLocalStorage.push(produitDetails.quantiteProduit)
-                                console.table(prodLocalStorage);
-                                VerifPopup ();
-}
-
-
-
-
+                  }
     }
 
    });
   }
-
-
+ 
 // Récupération des Prod de l'API  ------------------------------///
 function getProd() {
   fetch("http://localhost:3000/api/products/" + id)

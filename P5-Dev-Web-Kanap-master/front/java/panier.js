@@ -15,7 +15,7 @@ if (prodLocalStorage === null || prodLocalStorage == 0) {
     else { 
         
 for (let produit in prodLocalStorage){
-
+        console.log(prodLocalStorage);
     //------------------------------------------------------  Insertion de l'élément "article"
       let productArticle = document.createElement("article");
     document.querySelector("#cart__items").appendChild(productArticle);
