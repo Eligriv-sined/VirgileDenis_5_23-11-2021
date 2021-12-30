@@ -1,7 +1,7 @@
 var str = window.location.href;
 var url = new URL(str);
 var id = url.searchParams.get("id");
-console.log(id);
+//console.log(id);
 
 let Product =""; 
 
@@ -31,13 +31,13 @@ getProd()
 
    
     for (let couleur of Product.colors){ // Insertion des differentes option de couleur
-      console.table(couleur);
+     // console.table(couleur);
       let produitCouleur = document.createElement("option");
       document.querySelector("#colors").appendChild(produitCouleur);
       produitCouleur.value = couleur;
       produitCouleur.innerHTML = couleur;
   }  
-  console.table(Product);
+  //console.table(Product);
   AjouterPanier(Product);
   
 }
@@ -76,11 +76,11 @@ function AjouterPanier(Product) {
                       }
                   }
 
-                  console.table(produitDetails);             
+                   
 
 
                   if (prodLocalStorage){
-                    const result = prodLocalStorage.find(el => el.id == produitDetails.id && el.color == prodLocalStorage.color);
+                    const result = prodLocalStorage.find(el => el.idProduit == produitDetails.idProduit && el.couleurProduit == produitDetails.couleurProduit);
                     if (result){ 
                       let newQuantite = Number(produitDetails.quantiteProduit) + Number(result.quantiteProduit);
                       result.quantity = newQuantite; 
@@ -95,10 +95,10 @@ function AjouterPanier(Product) {
                     }
                   }else{
                     prodLocalStorage =[];     
-    prodLocalStorage.push(produitDetails);
-    localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
-    console.table(prodLocalStorage);
-    VerifPopup ();
+                     prodLocalStorage.push(produitDetails);
+                     localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+                         console.table(prodLocalStorage);
+                         VerifPopup ();
                   }
     }
 

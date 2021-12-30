@@ -15,7 +15,7 @@ if (prodLocalStorage === null || prodLocalStorage == 0) {
     else { 
         
 for (let produit in prodLocalStorage){
-        console.log(prodLocalStorage);
+        
     //------------------------------------------------------  Insertion de l'élément "article"
       let productArticle = document.createElement("article");
     document.querySelector("#cart__items").appendChild(productArticle);
@@ -74,7 +74,7 @@ for (let produit in prodLocalStorage){
                       //------------------------------------------------------ Insertion quantité
                     let productQuantity = document.createElement("input");
                    productItemContentSettingsQuantity.appendChild(productQuantity);
-                  productQuantity.value = prodLocalStorage[produit].quantiteProduit;
+                  productQuantity.value = prodLocalStorage[produit].quantiteProduit ;
                    productQuantity.className = "itemQuantity";
                  productQuantity.setAttribute("type", "number");
                  productQuantity.setAttribute("min", "1");
