@@ -2,7 +2,7 @@ var str = window.location.href;
 var url = new URL(str);
 var id = url.searchParams.get("id");
 console.log(id);
-let product2 =[];
+
 let Product =""; 
 const CouleurProd = document.querySelector("#colors");
 const NombreProd = document.querySelector("#quantity");
@@ -42,17 +42,15 @@ getProd()
 //---------------------------------------------------Gestion du panier--------------------//
 function AjouterPanier(Product) {
     const btn_envoyerPanier = document.querySelector("#addToCart");
-
-   
     btn_envoyerPanier.addEventListener("click", (e)=>{//event d'ecoute pour 
         if (NombreProd.value > 0 && NombreProd.value <=100 ){
 
  //----------------------------------------Recuperations des choix de couleur / quantitée
-              let choixCouleur = CouleurProd.value;
-              let choixQuantite = NombreProd.value;
+            let choixCouleur = CouleurProd.value;
+            let choixQuantite = NombreProd.value;
 
-              //tableau pour les articles a envoyé
-              let produitDetails = {
+             //tableau pour les articles a envoyé
+            let produitDetails = {
                   idProduit: id,
                   couleurProduit: choixCouleur,
                   quantiteProduit: Number(choixQuantite),
@@ -65,7 +63,7 @@ function AjouterPanier(Product) {
 
  //--------------------Creation Zone de Stockage local pour le Panier----------------------------------------------------------------------------------------
               let prodLocalStorage = JSON.parse(localStorage.getItem("produit"));
-             
+              
               //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
                   //fenêtre pop-up
@@ -74,40 +72,38 @@ function AjouterPanier(Product) {
                           window.location.href ="cart.html";
                       }
                   }
-//----------------------------------------------------------------------------------------------------//
-       
-    //---------------------------------------------------------------------------------------------//
+
                           
-    
-    if (prodLocalStorage) {
-                          
-                              if (produitDetails.idProduit && produitDetails.couleurProduit === prodLocalStorage.idProduit && prodLocalStorage.couleurProduit){
-                                let newQuantite = produitDetails.quantiteProduit += prodLocalStorage.quantiteProduit
-                                prodLocalStorage.quantiteProduit = newQuantite;
-                                localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+if (prodLocalStorage == null ){
+    prodLocalStorage =[];     
+    prodLocalStorage.push(produitDetails);
+    localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+    console.table(prodLocalStorage);
+    VerifPopup ();
+} else if (prodLocalStorage !== null){
+  prodLocalStorage.push(produitDetails);
+                            localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+                            console.table(prodLocalStorage);
+                            VerifPopup (); 
+} else {
+  let quantitéprod = prodLocalStorage[produit].quantiteProduit + produitDetails.quantiteProduit
+                            prodLocalStorage.quantiteProduit = quantitéprod ; 
+                            localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
                                 prodLocalStorage.push(produitDetails.quantiteProduit)
                                 console.table(prodLocalStorage);
-                                VerifPopup (); 
-                                } else  if (prodLocalStorage !== null ) {  
-                                    prodLocalStorage.push(produitDetails);
-                                     localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
-                                     console.table(prodLocalStorage);
-                                     VerifPopup ();
-                                       }
-                           }
-                                    else  {
-                                      prodLocalStorage =[];     
-                                  prodLocalStorage.push(produitDetails);
-                                  localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
-                                  console.table(prodLocalStorage);
-                                  VerifPopup ();
-                                    } } 
-                           //--------------------------------------------------------------------------------------------//
-                          });
-                      }
+                                VerifPopup ();
+}
 
 
-// Récupération des Prod de l'API + Repartion dans le DOM ------------------------------///
+
+
+    }
+
+   });
+  }
+
+
+// Récupération des Prod de l'API  ------------------------------///
 function getProd() {
   fetch("http://localhost:3000/api/products/" + id)
   .then((res) => {

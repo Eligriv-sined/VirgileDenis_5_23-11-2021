@@ -3,9 +3,8 @@
 let prodLocalStorage = JSON.parse(localStorage.getItem("produit"));
 console.table(prodLocalStorage);
 const positionEmptyCart = document.querySelector("#cart__items");
+
 //------------------------------------------------------------------------------------------------------------ 
-
-
 
 //------------------------------------------------------------------------------------------------------------  Si le panier est vide
 function getpanier(){
@@ -17,11 +16,8 @@ if (prodLocalStorage === null || prodLocalStorage == 0) {
         
 for (let produit in prodLocalStorage){
 
-    if(prodLocalStorage.idProduit && prodLocalStorage.couleurProduit){}
-
-
     //------------------------------------------------------  Insertion de l'élément "article"
-    else { let productArticle = document.createElement("article");
+      let productArticle = document.createElement("article");
     document.querySelector("#cart__items").appendChild(productArticle);
     productArticle.className = "cart__item";
     productArticle.setAttribute('data-id', prodLocalStorage[produit].idProduit);
@@ -36,69 +32,69 @@ for (let produit in prodLocalStorage){
          productImg.src = prodLocalStorage[produit].imgProduit;
          productImg.alt = prodLocalStorage[produit].altImgProduit;
                 //------------------------------------------------------  Insertion de l'élément "div"
-              let productItemContent = document.createElement("div");
-               productArticle.appendChild(productItemContent);
-               productItemContent.className = "cart__item__content";
+            let productItemContent = document.createElement("div");
+            productArticle.appendChild(productItemContent);
+            productItemContent.className = "cart__item__content";
                     //------------------------------------------------------  Insertion de l'élément "div"
-                    let productItemContentTitlePrice = document.createElement("div");
-                    productItemContent.appendChild(productItemContentTitlePrice);
-                    productItemContentTitlePrice.className = "cart__item__content__titlePrice";
+            let productItemContentTitlePrice = document.createElement("div");
+            productItemContent.appendChild(productItemContentTitlePrice);
+           productItemContentTitlePrice.className = "cart__item__content__titlePrice";
                     
                         //------------------------------------------------------  Insertion du titre h3
-                        let productTitle = document.createElement("h2");
-                        productItemContentTitlePrice.appendChild(productTitle);
-                        productTitle.innerHTML = prodLocalStorage[produit].nomProduit;
+            let productTitle = document.createElement("h2");
+            productItemContentTitlePrice.appendChild(productTitle);
+           productTitle.innerHTML = prodLocalStorage[produit].nomProduit;
 
                             //------------------------------------------------------  Insertion de la couleur
-                            let productColor = document.createElement("p");
-                            productTitle.appendChild(productColor);
-                            productColor.innerHTML = prodLocalStorage[produit].couleurProduit;
-                            productColor.style.fontSize = "20px";
+            let productColor = document.createElement("p");
+           productTitle.appendChild(productColor);
+           productColor.innerHTML = prodLocalStorage[produit].couleurProduit;
+          productColor.style.fontSize = "20px";
 
                                 //------------------------------------------------------  Insertion du prix
-                                let productPrice = document.createElement("p");
-                                productItemContentTitlePrice.appendChild(productPrice);
-                                productPrice.innerHTML = prodLocalStorage[produit].prixProduit + " €";
+               let productPrice = document.createElement("p");
+               productItemContentTitlePrice.appendChild(productPrice);
+              productPrice.innerHTML = prodLocalStorage[produit].prixProduit + " €";
 
                                     // ------------------------------------------------------ Insertion de l'élément "div"
-                                    let productItemContentSettings = document.createElement("div");
-                                    productItemContent.appendChild(productItemContentSettings);
-                                    productItemContentSettings.className = "cart__item__content__settings";
+               let productItemContentSettings = document.createElement("div");
+               productItemContent.appendChild(productItemContentSettings);
+              productItemContentSettings.className = "cart__item__content__settings";
 
                                         //------------------------------------------------------ Insertion de l'élément "div"
-                                        let productItemContentSettingsQuantity = document.createElement("div");
-                                        productItemContentSettings.appendChild(productItemContentSettingsQuantity);
-                                        productItemContentSettingsQuantity.className = "cart__item__content__settings__quantity";
+                 let productItemContentSettingsQuantity = document.createElement("div");
+                productItemContentSettings.appendChild(productItemContentSettingsQuantity);
+              productItemContentSettingsQuantity.className = "cart__item__content__settings__quantity";
                                         
                                             //------------------------------------------------------  Insertion de "quantité : "
-                                            let productQte = document.createElement("p");
-                                            productItemContentSettingsQuantity.appendChild(productQte);
-                                            productQte.innerHTML = "quantité : ";
+                    let productQte = document.createElement("p");
+                   productItemContentSettingsQuantity.appendChild(productQte);
+                    productQte.innerHTML = "quantité : ";
 
-                                                //------------------------------------------------------ Insertion quantité
-                                                 let productQuantity = document.createElement("input");
-                                                 productItemContentSettingsQuantity.appendChild(productQuantity);
-                                                 productQuantity.value = prodLocalStorage[produit].quantiteProduit;
-                                                 productQuantity.className = "itemQuantity";
-                                                 productQuantity.setAttribute("type", "number");
-                                                 productQuantity.setAttribute("min", "1");
-                                                 productQuantity.setAttribute("max", "100");
-                                                 productQuantity.setAttribute("name", "itemQuantity");
+                      //------------------------------------------------------ Insertion quantité
+                    let productQuantity = document.createElement("input");
+                   productItemContentSettingsQuantity.appendChild(productQuantity);
+                  productQuantity.value = prodLocalStorage[produit].quantiteProduit;
+                   productQuantity.className = "itemQuantity";
+                 productQuantity.setAttribute("type", "number");
+                 productQuantity.setAttribute("min", "1");
+               productQuantity.setAttribute("max", "100");
+              productQuantity.setAttribute("name", "itemQuantity");
 
-                                                    //------------------------------------------------------  Insertion div
-                                                    let productItemContentSettingsDelete = document.createElement("div");
-                                                    productItemContentSettings.appendChild(productItemContentSettingsDelete);
-                                                    productItemContentSettingsDelete.className = "cart__item__content__settings__delete";
+              //------------------------------------------------------  Insertion div
+           let productItemContentSettingsDelete = document.createElement("div");
+        productItemContentSettings.appendChild(productItemContentSettingsDelete);
+            productItemContentSettingsDelete.className = "cart__item__content__settings__delete";
 
-                                                    //------------------------------------------------------  Insertion du btnsupprimer  via element p 
-                                                    let productSupprimer = document.createElement("p");
-                                                    productItemContentSettingsDelete.appendChild(productSupprimer);
-                                                    productSupprimer.className = "deleteItem";
-                                                    productSupprimer.innerHTML = "Supprimer";}
+            //------------------------------------------------------  Insertion du btnsupprimer  via element p 
+             let productSupprimer = document.createElement("p");
+          productItemContentSettingsDelete.appendChild(productSupprimer);
+            productSupprimer.className = "deleteItem";
+            productSupprimer.innerHTML = "Supprimer";}
 
 
 }}
-}
+
 getpanier();
 
 
