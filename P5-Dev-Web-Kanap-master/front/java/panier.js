@@ -146,10 +146,11 @@ function changementQte() {
       e.preventDefault();
 
       //Selection de l'element à modifier en fonction de son id ET sa couleur
+
+      if (prodLocalStorage[k].quantity == null) {
       let modifQte = prodLocalStorage[k].quantiteProduit;
       console.log(modifQte);
       let valeurQtémodifier = modificationQte[k].valueAsNumber;
-
       const resultFind = prodLocalStorage.find(
         (el) => el.valeurQtémodifier !== modifQte
       );
@@ -161,6 +162,23 @@ function changementQte() {
 
       // refresh rapide
       location.reload();
+    } else {
+        let modifQte = prodLocalStorage[k].quantity;
+      console.log(modifQte);
+      let valeurQtémodifier = modificationQte[k].valueAsNumber;
+      const resultFind = prodLocalStorage.find(
+        (el) => el.valeurQtémodifier !== modifQte
+      );
+
+      resultFind.quantiteProduit = valeurQtémodifier;
+      prodLocalStorage[k].quantity = resultFind.quantiteProduit;
+
+      localStorage.setItem("produit", JSON.stringify(prodLocalStorage));
+
+      // refresh rapide
+      location.reload();}
+
+      
     });
   }
 }
