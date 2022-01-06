@@ -219,7 +219,7 @@ function regexForm() {
 
   //---------------------------------Création des expressions régulières---------------------------------//
   let emailRegExp = new RegExp(
-    "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$"
+    "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$" 
   );
   let txtRegExp = new RegExp("^[a-zA-Z ,.'-]+$");
   let addressRegExp = new RegExp(
